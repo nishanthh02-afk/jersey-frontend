@@ -1,16 +1,86 @@
-# React + Vite
+# Realwear — Jersey E-Commerce Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, full-stack jersey e-commerce storefront built with React and Vite. Realwear offers authentic football, IPL, and F1 jerseys from the world's greatest clubs and national teams.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
+[https://realwear.vercel.app](https://realwear.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠️ Tech Stack
+- **React** (Vite)
+- **Tailwind CSS v3**
+- **Axios** — API calls
+- **React Router v6** — Client-side routing
+- **GSAP** — Animations
+- **Lenis** — Smooth scrolling
+- **Razorpay** — Payment integration
 
-## React Compiler
+## 📦 Features
+- Browse jerseys by league, team, and category
+- Product detail page with size selector and size guide
+- Add to cart and wishlist
+- Razorpay payment integration (end-to-end)
+- User authentication (login, register, forgot password)
+- Profile, address, and order management
+- Admin dashboard — manage products, orders, and users
+- Hero section with rotating video background
+- Fully responsive navbar with search
+- Help, Shipping, Contact, About, Careers, Privacy, Terms pages
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🗂️ Pages
+**Customer**
+- Login, Register, Forgot Password
+- Home, Products, Product Detail
+- Cart, Wishlist, Checkout
+- Profile, Addresses, Orders
 
-## Expanding the ESLint configuration
+**Admin**
+- Dashboard, Products, Orders, Users
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Static**
+- Help, Shipping, Contact, About, Careers, Privacy Policy, Terms & Conditions, Cookie Settings
+
+## ⚙️ Setup
+
+### Prerequisites
+- Node.js 18+
+- Backend running on `http://localhost:8080`
+
+### Installation
+```bash
+git clone https://github.com/nishanthh02-afk/jersey-frontend.git
+cd jersey-frontend
+npm install
+```
+
+
+
+### Run
+```bash
+npm run dev
+```
+
+## 🔗 Backend
+[https://github.com/nishanthh02-afk/jersey-store-backend](https://github.com/nishanthh02-afk/jersey-store-backend)
+
+## 🎨 Brand
+- **Fonts**: Bebas Neue, Barlow Condensed
+- **Accent**: #408267 (green), #007CC6 (blue)
+- **Logo**: REAL*wear*
+
+## 📁 Project Structure
+src/
+
+├── assets/          # Images and videos
+
+├── components/      # ProtectedRoute
+
+├── hooks/           # useLenis
+
+├── pages/           # All page components
+
+├── services/        # Axios API config
+
+└── App.jsx          # Routes
+
+## 👨‍💻 Developer
+Nishanth — Full Stack Developer
