@@ -1,7 +1,7 @@
 import { useState } from "react";
 import jerseyImage from '../assets/loginpage-photo.jpeg';
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import api from '../api/axiosInstance'
 
 function RegisterPage() {
 
@@ -23,7 +23,7 @@ function RegisterPage() {
         setLoading(true)
         setError('')
         try {
-            await B.post(`/auth/register`, {
+            await api.post(`/auth/register`, {
                 name,
                 email,
                 phone,
