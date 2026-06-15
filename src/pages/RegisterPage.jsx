@@ -1,7 +1,7 @@
 import { useState } from "react";
 import jerseyImage from '../assets/loginpage-photo.jpeg';
 import { useNavigate } from 'react-router-dom'
-import api from '../api/axiosInstance'
+import api from '../services/api'
 
 function RegisterPage() {
 
