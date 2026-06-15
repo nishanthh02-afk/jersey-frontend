@@ -23,7 +23,7 @@ function RegisterPage() {
         setLoading(true)
         setError('')
         try {
-            await axios.post('http://localhost:8080/api/auth/register', {
+            await B.post(`/auth/register`, {
                 name,
                 email,
                 phone,
