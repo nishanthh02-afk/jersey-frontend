@@ -74,7 +74,7 @@ function CheckoutPage() {
 
             // Step 3 — Open Razorpay
             const options = {
-                key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+                key: 'rzp_test_SydiD1cNlI0kb2',
                 amount: paymentRes.data.amount * 100,
                 currency: 'INR',
                 name: 'Realwear',
