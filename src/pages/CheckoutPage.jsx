@@ -105,7 +105,8 @@ function CheckoutPage() {
             const razorpay = new window.Razorpay(options)
             razorpay.open()
 
-        } catch {
+        } catch (err) {
+            console.error('Checkout error:', err)
             setError('Failed to place order. Please try again.')
         } finally {
             setPlacing(false)
