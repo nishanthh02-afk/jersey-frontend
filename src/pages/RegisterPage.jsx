@@ -40,15 +40,15 @@ function RegisterPage() {
 
     return (
         <div>
-            <div className="min-h-screen flex p-12">
+            <div className="min-h-screen flex flex-col md:flex-row p-6 md:p-12">
 
                 {/* left side */}
-                <div className="w-1/2 flex flex-col">
-                    <div className="h-[45vh] overflow-hidden">
+                <div className="w-full md:w-1/2 flex flex-col">
+                    <div className="h-[30vh] md:h-[45vh] overflow-hidden">
                         <img src={jerseyImage} className="w-full h-full object-cover object-top" style={{objectPosition: '60% top'}} />
                     </div>
-                    <div className="p-10 flex flex-col justify-center">
-                        <h2 className="font-sans text-black text-4xl leading-tight font-bold">
+                    <div className="p-6 md:p-10 flex flex-col justify-center">
+                        <h2 className="font-sans text-black text-2xl md:text-4xl leading-tight font-bold">
                             JOIN REALWEAR TO UNLOCK <br/> EXCLUSIVE ACCESS
                         </h2>
                         <p className="text-black text-sm mt-4 font-sans">
@@ -81,12 +81,11 @@ function RegisterPage() {
                 </div>
 
                 {/* right side - register form */}
-                <div className="w-1/2 bg-white px-16 pt-16 pb-16 flex flex-col justify-start">
+                <div className="w-full md:w-1/2 bg-white px-6 md:px-16 pt-8 md:pt-16 pb-16 flex flex-col justify-start">
                     <h1 className="font-sans text-black text-4xl font-semibold tracking-tight">REAL<span className="font-barlow italic font-semibold relative -top-[0.2] text-5xl">wear</span></h1>
-                    <h2 className="text-black font-sans text-4xl mt-6 font-bold">CREATE ACCOUNT</h2>
+                    <h2 className="text-black font-sans text-3xl md:text-4xl mt-6 font-bold">CREATE ACCOUNT</h2>
                     <p className="text-black mt-6 font-sans text-sm">Join Realwear and enjoy exclusive access to premium football kits.</p>
 
-                    {/* Name */}
                     <input
                         type="text"
                         value={name}
@@ -97,7 +96,6 @@ function RegisterPage() {
                         }`}
                     />
 
-                    {/* Email */}
                     <input
                         type="email"
                         value={email}
@@ -108,7 +106,6 @@ function RegisterPage() {
                         }`}
                     />
 
-                    {/* Phone */}
                     <input
                         type="tel"
                         value={phone}
@@ -119,7 +116,6 @@ function RegisterPage() {
                         }`}
                     />
 
-                    {/* Password */}
                     <input
                         type="password"
                         value={password}
@@ -133,7 +129,6 @@ function RegisterPage() {
                         <p className="text-red-500 text-xs mt-1">Minimum 8 characters required</p>
                     )}
 
-                    {/* Terms checkbox */}
                     <div className="flex items-start gap-3 w-full mt-6">
                         <div
                             onClick={() => setTermsChecked(!termsChecked)}
@@ -168,8 +163,8 @@ function RegisterPage() {
             </div>
 
             {/* Green banner */}
-            <div className="bg-[#007CC6] w-full flex items-center justify-evenly px-20 py-12">
-                <h2 className="font-bebas text-white text-4xl tracking-widest">
+            <div className="bg-[#007CC6] w-full flex flex-col md:flex-row items-center justify-evenly px-6 md:px-20 py-12 gap-6">
+                <h2 className="font-bebas text-white text-3xl md:text-4xl tracking-widest text-center">
                     BECOME A MEMBER AND EARN REWARDS WITH REALWEAR
                 </h2>
                 <button className="border-2 border-white text-black bg-white font-sans font-medium tracking-widest text-lg px-8 py-4 flex items-center gap-3 hover:bg-black hover:text-white">
@@ -178,8 +173,8 @@ function RegisterPage() {
             </div>
 
             {/* Footer */}
-            <div className="bg-black w-full px-20 py-16">
-                <div className="flex justify-around">
+            <div className="bg-black w-full px-6 md:px-20 py-16">
+                <div className="grid grid-cols-2 md:flex md:justify-around gap-8">
                     <div>
                         <h3 className="text-white font-sans font-bold text-[1.1rem] mb-4">JERSEYS</h3>
                         <ul className="space-y-3">
@@ -214,7 +209,7 @@ function RegisterPage() {
                             <li className="text-white text-sm hover:underline cursor-pointer font-sans" onClick={() => navigate('/terms')}>Terms & Conditions</li>
                         </ul>
                     </div>
-                    <div>
+                    <div className="col-span-2 md:col-span-1">
                         <h3 className="text-white font-sans font-bold text-[1.1rem] mb-4">FOLLOW US</h3>
                         <div className="flex gap-4">
                             <a href="https://instagram.com" target="_blank" className="text-white">
@@ -230,7 +225,7 @@ function RegisterPage() {
                         </div>
                     </div>
                 </div>
-                <div className="border-t border-gray-800 mt-12 pt-8 flex justify-between items-center">
+                <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-white font-sans text-sm">© 2026 Realwear. All rights reserved.</p>
                     <div className="flex gap-6">
                         <span className="text-white text-sm font-sans hover:underline cursor-pointer" onClick={() => navigate('/privacy')}>Privacy Policy</span>

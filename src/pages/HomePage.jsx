@@ -22,6 +22,7 @@ function HomePage() {
     const [activeIconTab, setActiveIconTab] = useState('ALL')
     const [activeF1Tab, setActiveF1Tab] = useState('ALL')
     const [products, setProducts] = useState([])
+    const [menuOpen, setMenuOpen] = useState(false)
 
     const scrollRef = useRef(null)
     const nationScrollRef = useRef(null)
@@ -117,29 +118,31 @@ function HomePage() {
             )
 
         return (
-            <div className="px-12 py-10">
+            <div className="px-4 md:px-12 py-10">
                 <div className="flex justify-between items-center mb-5">
-                    <h2 className="font-bebas text-black text-4xl tracking-wider">{title}</h2>
+                    <h2 className="font-bebas text-black text-3xl md:text-4xl tracking-wider">{title}</h2>
                     <span className="font-sans text-black text-sm underline cursor-pointer hover:text-gray-500" onClick={() => navigate(shopAllLink || '/products')}>Shop all</span>
                 </div>
-                <div className="flex gap-3 mb-8">
-                    {tabs.map((tab) => (
-                        <button
-                            key={tab}
-                            onClick={() => setActiveTab(tab)}
-                            className={`border px-5 py-2 text-sm font-sans font-medium ${
-                                activeTab === tab ? 'bg-black text-white border-black' : 'border-black text-black hover:bg-black hover:text-white'
-                            }`}
-                        >
-                            {tab}
-                        </button>
-                    ))}
-                </div>
+                {tabs.length > 0 && (
+                    <div className="flex gap-2 mb-8 overflow-x-auto scrollbar-hide pb-2">
+                        {tabs.map((tab) => (
+                            <button
+                                key={tab}
+                                onClick={() => setActiveTab(tab)}
+                                className={`border px-4 py-2 text-xs md:text-sm font-sans font-medium flex-shrink-0 ${
+                                    activeTab === tab ? 'bg-black text-white border-black' : 'border-black text-black hover:bg-black hover:text-white'
+                                }`}
+                            >
+                                {tab}
+                            </button>
+                        ))}
+                    </div>
+                )}
                 <div className="relative">
-                    <div ref={scrollRef} className="flex gap-6 overflow-x-auto scrollbar-hide">
+                    <div ref={scrollRef} className="flex gap-4 md:gap-6 overflow-x-auto scrollbar-hide">
                         {filteredProducts.map((product, index) => (
-                            <div key={product.id || index} className="group flex-shrink-0 w-72 border-[1px] border-transparent hover:border-black pb-4">
-                                <div className="bg-gray-100 h-72 relative overflow-hidden">
+                            <div key={product.id || index} className="group flex-shrink-0 w-48 md:w-72 border-[1px] border-transparent hover:border-black pb-4">
+                                <div className="bg-gray-100 h-48 md:h-72 relative overflow-hidden">
                                     {product.images && product.images.length > 0 ? (
                                         <img
                                             src={product.images.find(img => img.isPrimary)?.imageUrl || product.images[0].imageUrl}
@@ -161,17 +164,17 @@ function HomePage() {
                                         </svg>
                                     </button>
                                 </div>
-                                <div className="mt-6 ml-4">
-                                    <p className="font-sans text-black font-extrabold text-[0.9rem]">{product.name}</p>
-                                    <p className="font-sans text-gray-500 text-sm">{product[tabKey] || product.league}</p>
-                                    <p className="font-sans text-black font-medium text-sm mt-1">₹{product.price?.toLocaleString()}</p>
-                                    <p onClick={() => navigate(`/products/${product.id}`)} className="font-sans text-black text-[0.9rem] underline cursor-pointer inline-block hover:bg-black hover:text-white hover:decoration-white mt-4">Shop Now</p>
+                                <div className="mt-4 ml-3">
+                                    <p className="font-sans text-black font-extrabold text-[0.8rem] md:text-[0.9rem]">{product.name}</p>
+                                    <p className="font-sans text-gray-500 text-xs md:text-sm">{product[tabKey] || product.league}</p>
+                                    <p className="font-sans text-black font-medium text-xs md:text-sm mt-1">₹{product.price?.toLocaleString()}</p>
+                                    <p onClick={() => navigate(`/products/${product.id}`)} className="font-sans text-black text-[0.8rem] md:text-[0.9rem] underline cursor-pointer inline-block hover:bg-black hover:text-white hover:decoration-white mt-3">Shop Now</p>
                                 </div>
                             </div>
                         ))}
                     </div>
-                    <button onClick={() => scrollLeft(scrollRef)} className="absolute left-0 top-1/3 bg-white border border-gray-300 p-3 shadow-md hover:bg-black hover:text-white z-10">←</button>
-                    <button onClick={() => scrollRight(scrollRef)} className="absolute right-0 top-1/3 bg-white border border-gray-300 p-3 shadow-md hover:bg-black hover:text-white z-10">→</button>
+                    <button onClick={() => scrollLeft(scrollRef)} className="absolute left-0 top-1/3 bg-white border border-gray-300 p-2 md:p-3 shadow-md hover:bg-black hover:text-white z-10">←</button>
+                    <button onClick={() => scrollRight(scrollRef)} className="absolute right-0 top-1/3 bg-white border border-gray-300 p-2 md:p-3 shadow-md hover:bg-black hover:text-white z-10">→</button>
                 </div>
             </div>
         )
@@ -180,25 +183,28 @@ function HomePage() {
     return (
         <div>
             {/* Announcement Bar */}
-            <div className="bg-black text-white text-center py-3 text-sm font-sans tracking-widest">
+            <div className="bg-black text-white text-center py-3 text-xs md:text-sm font-sans tracking-widest">
                 FREE DELIVERY ON ORDERS ABOVE ₹999  &nbsp;|&nbsp; 100% AUTHENTIC JERSEYS
             </div>
 
             {/* Navbar */}
-            <div className="bg-white px-12 py-5 flex items-center justify-between border-b border-gray-200 sticky top-0 z-50">
-                <h1 className="font-sans text-black text-3xl font-semibold tracking-tight cursor-pointer" onClick={() => navigate('/home')}>
-                    REAL<span className="font-barlow italic font-semibold  text-4xl ">wear</span>
+            <div className="bg-white px-4 md:px-12 py-4 md:py-5 flex items-center justify-between border-b border-gray-200 sticky top-0 z-50">
+                <h1 className="font-sans text-black text-2xl md:text-3xl font-semibold tracking-tight cursor-pointer" onClick={() => navigate('/home')}>
+                    REAL<span className="font-barlow italic font-semibold text-3xl md:text-4xl">wear</span>
                 </h1>
-                <div className="flex items-center gap-10">
+
+                {/* Desktop Nav */}
+                <div className="hidden md:flex items-center gap-10">
                     <span className="font-sans text-black text-[1rem] font-bold hover:underline hover:decoration-2 cursor-pointer tracking-wider" onClick={() => navigate('/products?category=clubs')}>CLUB KITS</span>
                     <span className="font-sans text-black text-[1rem] font-bold hover:underline hover:decoration-2 cursor-pointer tracking-wider" onClick={() => navigate('/products?category=nations')}>NATION KITS</span>
                     <span className="font-sans text-black text-[1rem] font-bold hover:underline hover:decoration-2 cursor-pointer tracking-wider" onClick={() => navigate('/products?category=icons')}>ICONS</span>
                     <span className="font-sans text-red-500 text-[1rem] hover:underline hover:decoration-2 font-bold cursor-pointer tracking-wider" onClick={() => navigate('/products')}>SALE</span>
-
                 </div>
-                <div className="flex items-center gap-6">
+
+                {/* Desktop Icons */}
+                <div className="hidden md:flex items-center gap-6">
                     <div className="flex items-center gap-2 border border-gray-300 px-4 py-2 w-48">
-                        <svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-black ">
+                        <svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-black">
                             <path fillRule="evenodd" clipRule="evenodd" d="M14.0909 6C9.62242 6 6 9.62242 6 14.0909C6 18.5594 9.62242 22.1818 14.0909 22.1818C16.3253 22.1818 18.3473 21.2768 19.812 19.812C21.2768 18.3473 22.1818 16.3253 22.1818 14.0909C22.1818 9.62242 18.5594 6 14.0909 6ZM5 14.0909C5 9.07014 9.07014 5 14.0909 5C19.1117 5 23.1818 9.07014 23.1818 14.0909C23.1818 16.4212 22.3045 18.5474 20.863 20.1559L27.3536 26.6464L26.6464 27.3536L20.1559 20.863C18.5474 22.3045 16.4212 23.1818 14.0909 23.1818C9.07014 23.1818 5 19.1117 5 14.0909Z" fill="currentColor"/>
                         </svg>
                         <input
@@ -216,19 +222,52 @@ function HomePage() {
                         <path fillRule="evenodd" clipRule="evenodd" d="M9.22548 20H22.7744L26.4218 25.7316L25.5781 26.2684L22.2255 21H9.77443L6.42179 26.2684L5.57812 25.7316L9.22548 20Z" fill="currentColor"/>
                         <path fillRule="evenodd" clipRule="evenodd" d="M16 17C18.761 17 21 14.761 21 12C21 9.23895 18.761 7 16 7C13.2377 7 11 9.23881 11 12C11 14.7612 13.2377 17 16 17ZM16 18C19.3133 18 22 15.3133 22 12C22 8.68667 19.3133 6 16 6C12.6853 6 9.99996 8.68667 9.99996 12C9.99996 15.3133 12.6853 18 16 18Z" fill="currentColor"/>
                     </svg>
-
                     <svg onClick={() => navigate('/wishlist')} className="cursor-pointer" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M6.7206 6H11.7071L16 10.2929L20.2929 6H25.2794L29.6328 13.0743L16 26.7071L2.36719 13.0743L6.7206 6ZM7.2794 7L3.63281 12.9257L16 25.2929L28.3672 12.9257L24.7206 7H20.7071L16 11.7071L11.2929 7H7.2794Z" fill="currentColor"/>
                     </svg>
-
                     <svg onClick={() => navigate('/cart')} className="cursor-pointer" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M21 4H11V8H6V28H26V8H21V4ZM20 9V12H21V9H25V27H7V9H11V12H12V9H20ZM20 8V5H12V8H20Z" fill="currentColor"/>
                     </svg>
                 </div>
+
+                {/* Mobile Icons */}
+                <div className="flex md:hidden items-center gap-4">
+                    <svg onClick={() => navigate('/wishlist')} className="cursor-pointer" width="22" height="22" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" clipRule="evenodd" d="M6.7206 6H11.7071L16 10.2929L20.2929 6H25.2794L29.6328 13.0743L16 26.7071L2.36719 13.0743L6.7206 6ZM7.2794 7L3.63281 12.9257L16 25.2929L28.3672 12.9257L24.7206 7H20.7071L16 11.7071L11.2929 7H7.2794Z" fill="currentColor"/>
+                    </svg>
+                    <svg onClick={() => navigate('/cart')} className="cursor-pointer" width="22" height="22" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" clipRule="evenodd" d="M21 4H11V8H6V28H26V8H21V4ZM20 9V12H21V9H25V27H7V9H11V12H12V9H20ZM20 8V5H12V8H20Z" fill="currentColor"/>
+                    </svg>
+                    <button onClick={() => setMenuOpen(!menuOpen)} className="text-black font-bold text-xl">☰</button>
+                </div>
             </div>
 
+            {/* Mobile Menu */}
+            {menuOpen && (
+                <div className="md:hidden bg-white border-b border-gray-200 px-4 py-6 flex flex-col gap-4 z-40">
+                    <span className="font-sans text-black text-sm font-bold tracking-wider cursor-pointer" onClick={() => { navigate('/products?category=clubs'); setMenuOpen(false) }}>CLUB KITS</span>
+                    <span className="font-sans text-black text-sm font-bold tracking-wider cursor-pointer" onClick={() => { navigate('/products?category=nations'); setMenuOpen(false) }}>NATION KITS</span>
+                    <span className="font-sans text-black text-sm font-bold tracking-wider cursor-pointer" onClick={() => { navigate('/products?category=icons'); setMenuOpen(false) }}>ICONS</span>
+                    <span className="font-sans text-red-500 text-sm font-bold tracking-wider cursor-pointer" onClick={() => { navigate('/products'); setMenuOpen(false) }}>SALE</span>
+                    <span className="font-sans text-black text-sm font-bold tracking-wider cursor-pointer" onClick={() => { navigate('/profile'); setMenuOpen(false) }}>PROFILE</span>
+                    <div className="flex items-center gap-2 border border-gray-300 px-3 py-2">
+                        <input
+                            type="text"
+                            placeholder="Search"
+                            className="outline-none text-sm w-full font-sans"
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' && e.target.value.trim()) {
+                                    navigate(`/products?search=${e.target.value.trim()}`)
+                                    setMenuOpen(false)
+                                }
+                            }}
+                        />
+                    </div>
+                </div>
+            )}
+
             {/* Hero Section */}
-            <div className="relative bg-black h-[85vh] flex items-end overflow-hidden">
+            <div className="relative bg-black h-[60vh] md:h-[85vh] flex items-end overflow-hidden">
                 <video
                     ref={videoRef}
                     onEnded={handleVideoEnd}
@@ -238,18 +277,13 @@ function HomePage() {
                 >
                     <source src={videos[currentVideo]} type="video/mp4" />
                 </video>
-                <div className="absolute inset-0 " />
-                <div className="relative z-20 p-16 pb-20">
-                   {/*<p className="text-white font-sans text-sm tracking-widest mb-4 opacity-70">NEW COLLECTION 2026</p>*/}
-                   {/* <h2 className="font-bebas text-white text-8xl leading-none tracking-wide">THE PITCH<br/>IS YOURS</h2>*/}
-                   {/* <p className="text-white font-sans text-base mt-4 opacity-70 max-w-md">*/}
-                   {/*     Wear what the legends wear. Official player quality jerseys from the world's greatest clubs.*/}
-                   {/* </p>*/}
-                    <div className="flex gap-4 mt-8">
-                        <button onClick={() => navigate('/products')} className="bg-white text-black font-sans font-medium tracking-widest text-sm px-8 py-4 hover:bg-gray-200">
+                <div className="absolute inset-0" />
+                <div className="relative z-20 p-6 md:p-16 pb-10 md:pb-20">
+                    <div className="flex gap-3 md:gap-4 mt-8">
+                        <button onClick={() => navigate('/products')} className="bg-white text-black font-sans font-medium tracking-widest text-xs md:text-sm px-5 md:px-8 py-3 md:py-4 hover:bg-gray-200">
                             SHOP NOW →
                         </button>
-                        <button onClick={() => navigate('/products?category=clubs')} className="border border-white text-white font-sans font-medium tracking-widest text-sm px-8 py-4 hover:bg-white hover:text-black">
+                        <button onClick={() => navigate('/products?category=clubs')} className="border border-white text-white font-sans font-medium tracking-widest text-xs md:text-sm px-5 md:px-8 py-3 md:py-4 hover:bg-white hover:text-black">
                             EXPLORE CLUBS
                         </button>
                     </div>
@@ -269,23 +303,22 @@ function HomePage() {
             />
 
             {/* Two column promo */}
-            <div className="flex px-12 gap-6 pb-16">
-                <div className="w-1/2 cursor-pointer border-[1px] border-transparent hover:border-black pb-3" onClick={() => navigate('/products?category=clubs')}>
-                    <div className="h-96 relative overflow-hidden" style={{ backgroundImage: `url(${clubskit})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            <div className="flex flex-col md:flex-row px-4 md:px-12 gap-6 pb-16">
+                <div className="w-full md:w-1/2 cursor-pointer border-[1px] border-transparent hover:border-black pb-3" onClick={() => navigate('/products?category=clubs')}>
+                    <div className="h-64 md:h-96 relative overflow-hidden" style={{ backgroundImage: `url(${clubskit})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
                     </div>
                     <div className="mt-4 ml-4">
-                        <h3 className="font-bebas text-black text-4xl tracking-wider">CLUB KITS</h3>
-                        <p className="font-sans text-black text-sm ">Rep your favourite club</p>
+                        <h3 className="font-bebas text-black text-3xl md:text-4xl tracking-wider">CLUB KITS</h3>
+                        <p className="font-sans text-black text-sm">Rep your favourite club</p>
                         <p className="font-sans text-black font-extrabold underline cursor-pointer mt-4 inline-block hover:bg-black hover:text-white hover:decoration-white">SHOP NOW</p>
-
                     </div>
                 </div>
-                <div className="w-1/2 cursor-pointer border-[1px] border-transparent hover:border-black " onClick={() => navigate('/products?league=International')}>
-                    <div className="h-96 relative overflow-hidden" style={{ backgroundImage: `url(${nationsHero})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                <div className="w-full md:w-1/2 cursor-pointer border-[1px] border-transparent hover:border-black" onClick={() => navigate('/products?league=International')}>
+                    <div className="h-64 md:h-96 relative overflow-hidden" style={{ backgroundImage: `url(${nationsHero})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
                     </div>
                     <div className="mt-4 ml-4">
-                        <h3 className="font-bebas text-black text-4xl tracking-wider">NATION KITS</h3>
-                        <p className="font-sans text-black text-sm ">Wear your national pride</p>
+                        <h3 className="font-bebas text-black text-3xl md:text-4xl tracking-wider">NATION KITS</h3>
+                        <p className="font-sans text-black text-sm">Wear your national pride</p>
                         <p className="font-sans text-black font-extrabold underline cursor-pointer mt-4 inline-block hover:bg-black hover:text-white hover:decoration-white">SHOP NOW</p>
                     </div>
                 </div>
@@ -352,9 +385,9 @@ function HomePage() {
             />
 
             {/* About Section */}
-            <div className="bg-black w-full px-20 py-16">
+            <div className="bg-black w-full px-6 md:px-20 py-16">
                 <div className="max-w-4xl mx-auto">
-                    <h2 className="font-bebas text-white text-5xl tracking-widest mb-8 text-center">
+                    <h2 className="font-bebas text-white text-3xl md:text-5xl tracking-widest mb-8 text-center">
                         REALWEAR JERSEY STORE FOR AUTHENTIC KITS, PASSION & STYLE — SINCE 2024
                     </h2>
                     <p className="text-white font-sans text-sm leading-relaxed mb-6 text-justify">
@@ -376,9 +409,9 @@ function HomePage() {
             </div>
 
             {/* Green banner */}
-            <div className="bg-[#007CC6] w-full flex items-center justify-center px-20 py-16">
+            <div className="bg-[#007CC6] w-full flex items-center justify-center px-6 md:px-20 py-16">
                 <div className="text-center">
-                    <h2 className="font-bebas text-white text-6xl tracking-widest">
+                    <h2 className="font-bebas text-white text-4xl md:text-6xl tracking-widest">
                         THE BEAUTIFUL GAME.<br/>WEAR IT.
                     </h2>
                     <p className="text-white font-sans text-base mt-4 opacity-80 tracking-wider">
@@ -387,12 +420,9 @@ function HomePage() {
                 </div>
             </div>
 
-
-
-
             {/* Footer */}
-            <div className="bg-black w-full px-20 py-16">
-                <div className="flex justify-around">
+            <div className="bg-black w-full px-6 md:px-20 py-16">
+                <div className="grid grid-cols-2 md:flex md:justify-around gap-8">
                     <div>
                         <h3 className="text-white font-sans font-bold text-[1.1rem] mb-4">JERSEYS</h3>
                         <ul className="space-y-3">
@@ -427,7 +457,7 @@ function HomePage() {
                             <li className="text-white text-sm hover:underline cursor-pointer font-sans" onClick={() => navigate('/terms')}>Terms & Conditions</li>
                         </ul>
                     </div>
-                    <div>
+                    <div className="col-span-2 md:col-span-1">
                         <h3 className="text-white font-sans font-bold text-[1.1rem] mb-4">FOLLOW US</h3>
                         <div className="flex gap-4">
                             <a href="https://instagram.com" target="_blank" className="text-white">
@@ -443,7 +473,7 @@ function HomePage() {
                         </div>
                     </div>
                 </div>
-                <div className="border-t border-gray-800 mt-12 pt-8 flex justify-between items-center">
+                <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-white font-sans text-sm">© 2026 Realwear. All rights reserved.</p>
                     <div className="flex gap-6">
                         <span className="text-white text-sm font-sans hover:underline cursor-pointer" onClick={() => navigate('/privacy')}>Privacy Policy</span>

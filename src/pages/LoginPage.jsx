@@ -35,102 +35,102 @@ function LoginPage() {
 
     return (
         <div>
-        <div className="min-h-screen flex p-12">
+            <div className="min-h-screen flex flex-col md:flex-row p-6 md:p-12">
 
-            {/* left side */} <div className="w-1/2 flex flex-col">
-            <div className="h-[45vh] overflow-hidden">
-                <img src={jerseyImage} className="w-full h-full object-cover object-top"style={{objectPosition: '60% top'}} />
-            </div>
+                {/* left side */}
+                <div className="w-full md:w-1/2 flex flex-col">
+                    <div className="h-[30vh] md:h-[45vh] overflow-hidden">
+                        <img src={jerseyImage} className="w-full h-full object-cover object-top" style={{objectPosition: '60% top'}} />
+                    </div>
 
-                <div className="p-10 flex flex-col justify-center ">
-                    <h2 className="font-sans text-black text-4xl leading-tight font-bold">
-                        JOIN REALWEAR TO UNLOCK <br/> EXCLUSIVE ACCESS
-                    </h2>
-                    <p className="text-black text-sm mt-4 font-sans">
-                        Join Realwear for free and enjoy immediate access to premium benefits:
-                    </p>
-                    <ul className="mt-6 space-y-3">
-                        <li className="flex items-center gap-3 text-black text-sm font-sans">
-                            <span>✓</span> Player Quality Jerseys — Same kits worn on the pitch
-                        </li>
-                        <li className="flex items-center gap-3 text-black text-sm font-sans">
-                            <span>✓</span> Fast Delivery — Get your kit in 2-3 days
-                        </li>
-                        <li className="flex items-center gap-3 text-black text-sm font-sans">
-                            <span>✓</span> Exclusive Member Drops — First access to new arrivals
-                        </li>
-                        <li className="flex items-center gap-3 text-black text-sm font-sans">
-                            <span>✓</span> 100% Authentic — Official licensed merchandise
-                        </li>
-                        <li className="flex items-center gap-3 text-black text-sm font-sans">
-                            <span>✓</span> Welcome Discount — 10% off your first order
-                        </li>
-                        <li className="flex items-center gap-3 text-black text-sm font-sans">
-                            <span>✓</span> Free Returns — No questions asked
-                        </li>
-                    </ul>
-                    <p className="text-black text-sm mt-6 font-sans">
-                        Shop the world's best football kits. From Premier League to La Liga — every jersey, every club, delivered fast.
+                    <div className="p-6 md:p-10 flex flex-col justify-center">
+                        <h2 className="font-sans text-black text-2xl md:text-4xl leading-tight font-bold">
+                            JOIN REALWEAR TO UNLOCK <br/> EXCLUSIVE ACCESS
+                        </h2>
+                        <p className="text-black text-sm mt-4 font-sans">
+                            Join Realwear for free and enjoy immediate access to premium benefits:
+                        </p>
+                        <ul className="mt-6 space-y-3">
+                            <li className="flex items-center gap-3 text-black text-sm font-sans">
+                                <span>✓</span> Player Quality Jerseys — Same kits worn on the pitch
+                            </li>
+                            <li className="flex items-center gap-3 text-black text-sm font-sans">
+                                <span>✓</span> Fast Delivery — Get your kit in 2-3 days
+                            </li>
+                            <li className="flex items-center gap-3 text-black text-sm font-sans">
+                                <span>✓</span> Exclusive Member Drops — First access to new arrivals
+                            </li>
+                            <li className="flex items-center gap-3 text-black text-sm font-sans">
+                                <span>✓</span> 100% Authentic — Official licensed merchandise
+                            </li>
+                            <li className="flex items-center gap-3 text-black text-sm font-sans">
+                                <span>✓</span> Welcome Discount — 10% off your first order
+                            </li>
+                            <li className="flex items-center gap-3 text-black text-sm font-sans">
+                                <span>✓</span> Free Returns — No questions asked
+                            </li>
+                        </ul>
+                        <p className="text-black text-sm mt-6 font-sans">
+                            Shop the world's best football kits. From Premier League to La Liga — every jersey, every club, delivered fast.
+                        </p>
+                    </div>
+                </div>
+
+                {/* right side - login form */}
+                <div className="w-full md:w-1/2 bg-white px-6 md:px-16 pt-8 md:pt-16 pb-16 flex flex-col justify-start">
+                    <h1 className="font-sans text-black text-4xl font-semibold tracking-tight">REAL<span className="font-barlow italic font-semibold relative -top-[0.2] text-5xl">wear</span></h1>
+                    <h2 className="text-black font-sans text-3xl md:text-4xl mt-6 font-bold">LOG IN OR SIGN UP</h2>
+                    <p className="text-black mt-6 font-sans text-sm">Enjoy access to exclusive products, experiences, offers and more.</p>
+
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="EMAIL ADDRESS *"
+                        className={`w-full bg-transparent border py-4 pl-4 text-black placeholder-gray-500 mt-6 focus:placeholder-transparent focus:outline-none ${
+                            isValidEmail ? "border-black border-b-4 border-b-green-500" : "border-black border-b-4 border-b-red-500"
+                        }`}
+                    />
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        maxLength={8}
+                        placeholder="PASSWORD *"
+                        className={`w-full bg-transparent border py-4 pl-4 text-black placeholder-gray-500 mt-6 focus:placeholder-transparent focus:outline-none ${
+                            isValidPassword ? "border-green-500 border-b-4" : "border-red-500 border-b-4"
+                        }`}
+                    />
+                    {!isValidPassword && password.length > 0 && (
+                        <p className="text-red-500 text-xs mt-1">Minimum 8 characters required</p>
+                    )}
+                    <button
+                        onClick={handleSubmit}
+                        disabled={!isValidEmail || !isValidPassword || loading}
+                        className="mt-8 bg-black text-white font-sans hover:text-gray-500 tracking-widest text-lg font-medium px-8 py-4 flex items-center gap-3 w-fit disabled:opacity-50 disabled:cursor-not-allowed">
+                        {loading ? 'LOADING...' : 'CONTINUE'} <span>→</span>
+                    </button>
+
+                    {error && <p className="text-red-500 text-sm mt-3">{error}</p>}
+                    <p onClick={() => navigate('/forgot-password')} className="text-black text-sm mt-5 cursor-pointer underline hover:text-gray-500 font-sans">Forgot password?</p>
+                    <p className="text-black text-sm mt-4">
+                        Don't have an account? <span className="underline cursor-pointer font-medium hover:text-gray-500 font-sans" onClick={() => navigate('/register')}>Sign up</span>
                     </p>
                 </div>
             </div>
-
-            {/* right side - login form */}
-            <div className="w-1/2 bg-white px-16 pt-16 pb-16 flex flex-col justify-start">
-                <h1 className="font-sans text-black text-4xl font-semibold tracking-tight">REAL<span className="font-barlow italic font-semibold relative -top-[0.2] text-5xl">wear</span></h1>
-                <h2 className="text-black font-sans text-4xl mt-6 font-bold">LOG IN OR SIGN UP</h2>
-                <p className="text-black mt-6 font-sans text-sm">Enjoy access to exclusive products, experiences, offers and more.</p>
-
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="EMAIL ADDRESS *"
-                    className={`w-full bg-transparent border py-4 pl-4 text-black placeholder-gray-500 mt-6 focus:placeholder-transparent focus:outline-none ${
-                        isValidEmail ? "border-black border-b-4 border-b-green-500" : "border-black border-b-4 border-b-red-500"
-                    }`}
-                />
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    maxLength={8}
-                    placeholder="PASSWORD *"
-                    className={`w-full bg-transparent border py-4 pl-4 text-black placeholder-gray-500 mt-6 focus:placeholder-transparent focus:outline-none ${
-                        isValidPassword ? "border-green-500 border-b-4" : "border-red-500 border-b-4"
-                    }`}
-                />
-                {!isValidPassword && password.length > 0 && (
-                    <p className="text-red-500 text-xs mt-1">Minimum 8 characters required</p>
-                )}
-                <button
-                    onClick={handleSubmit}
-                    disabled={!isValidEmail || !isValidPassword || loading}
-                    className="mt-8 bg-black text-white font-sans hover:text-gray-500 tracking-widest text-lg font-medium px-8 py-4 flex items-center gap-3 w-fit disabled:opacity-50 disabled:cursor-not-allowed ">
-                    {loading ? 'LOADING...' : 'CONTINUE'} <span>→</span>
-                </button>
-
-                {error && <p className="text-red-500 text-sm mt-3">{error}</p>}
-                <p onClick={() => navigate('/forgot-password')} className="text-black text-sm mt-5 cursor-pointer underline hover:text-gray-500 font-sans">Forgot password?</p>
-                <p className="text-black text-sm mt-4">
-                    Don't have an account? <span className="underline cursor-pointer font-medium hover:text-gray-500 font-sans " onClick={() => navigate('/register')}>Sign up</span>
-                </p>
-            </div>
-        </div>
-            <div className="bg-[#007CC6] w-full flex items-center justify-center px-20 py-16 mt-16">
+            <div className="bg-[#007CC6] w-full flex items-center justify-center px-6 md:px-20 py-16 mt-16">
                 <div className="text-center">
-                    <h2 className="font-bebas text-white text-6xl tracking-widest">WELCOME BACK.<br/>YOUR KITS AWAIT.</h2>
+                    <h2 className="font-bebas text-white text-4xl md:text-6xl tracking-widest">WELCOME BACK.<br/>YOUR KITS AWAIT.</h2>
                     <p className="text-white font-sans text-base mt-4 tracking-wider">
                         Log in to shop authentic jerseys, track your orders and manage your wishlist.
                     </p>
                 </div>
             </div>
-            <div className="bg-black w-full px-20 py-16">
-                <div className="flex justify-around">
+            <div className="bg-black w-full px-6 md:px-20 py-16">
+                <div className="grid grid-cols-2 md:flex md:justify-around gap-8">
 
-                    {/* Jerseys */}
                     <div>
-                        <h3 className="text-white font-sans font-bold text-[1.1rem] mb-4 ">JERSEYS</h3>
+                        <h3 className="text-white font-sans font-bold text-[1.1rem] mb-4">JERSEYS</h3>
                         <ul className="space-y-3">
                             <li className="text-white text-sm hover:underline cursor-pointer font-sans">Club Jerseys</li>
                             <li className="text-white text-sm hover:underline cursor-pointer font-sans">National Team Jerseys</li>
@@ -138,9 +138,8 @@ function LoginPage() {
                         </ul>
                     </div>
 
-                    {/* Leagues */}
                     <div>
-                        <h3 className="text-white font-sans font-bold text-[1.1rem]  mb-4">LEAGUES</h3>
+                        <h3 className="text-white font-sans font-bold text-[1.1rem] mb-4">LEAGUES</h3>
                         <ul className="space-y-3">
                             <li className="text-white text-sm hover:underline cursor-pointer font-sans">Premier League</li>
                             <li className="text-white text-sm hover:underline cursor-pointer font-sans">La Liga</li>
@@ -150,9 +149,8 @@ function LoginPage() {
                         </ul>
                     </div>
 
-                    {/* Support */}
                     <div>
-                        <h3 className="text-white font-sans font-bold text-[1.1rem]  mb-4">SUPPORT</h3>
+                        <h3 className="text-white font-sans font-bold text-[1.1rem] mb-4">SUPPORT</h3>
                         <ul className="space-y-3">
                             <li className="text-white text-sm hover:underline cursor-pointer font-sans">Help</li>
                             <li className="text-white text-sm hover:underline cursor-pointer font-sans">Shipping</li>
@@ -160,9 +158,8 @@ function LoginPage() {
                         </ul>
                     </div>
 
-                    {/* Company Info */}
                     <div>
-                        <h3 className="text-white font-sans font-bold text-[1.1rem]  mb-4">COMPANY INFO</h3>
+                        <h3 className="text-white font-sans font-bold text-[1.1rem] mb-4">COMPANY INFO</h3>
                         <ul className="space-y-3">
                             <li className="text-white text-sm hover:underline cursor-pointer font-sans">About Us</li>
                             <li className="text-white text-sm hover:underline cursor-pointer font-sans">Careers</li>
@@ -171,9 +168,8 @@ function LoginPage() {
                         </ul>
                     </div>
 
-                    {/* Follow Us */}
-                    <div>
-                        <h3 className="text-white font-sans font-bold text-[1.1rem]  mb-4">FOLLOW US</h3>
+                    <div className="col-span-2 md:col-span-1">
+                        <h3 className="text-white font-sans font-bold text-[1.1rem] mb-4">FOLLOW US</h3>
                         <div className="flex gap-4">
                             <a href="https://instagram.com" target="_blank" className="text-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -190,8 +186,7 @@ function LoginPage() {
 
                 </div>
 
-                {/* Bottom bar */}
-                <div className="border-t border-gray-800 mt-12 pt-8 px-20 flex justify-between items-center">
+                <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-white font-sans text-sm">© 2026 Realwear. All rights reserved.</p>
                     <div className="flex gap-6">
                         <span className="text-white text-sm font-sans hover:underline cursor-pointer" onClick={() => navigate('/privacy')}>Privacy Policy</span>
